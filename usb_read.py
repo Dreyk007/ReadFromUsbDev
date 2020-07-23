@@ -2,7 +2,6 @@
 # By Valentine Dreyk
 
 import usb.core
-from time import sleep
 
 
 def get_dev_props(dev):
