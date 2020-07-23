@@ -6,5 +6,5 @@ $ python3 -m pip install pyusb
 ```
 and execute script with
 ```
-$ python3 usb_read.py
+$ sudo python3 usb_read.py
 ```
