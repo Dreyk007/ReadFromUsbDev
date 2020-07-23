@@ -43,10 +43,10 @@ def dev_read(dev, eaddr, max_packet_size):
         try:
             resp = dev.read(eaddr, max_packet_size)
             yield resp
+        except KeyboardInterrupt:
+            break
         except:
             pass
-        finally:
-            sleep(0.1)
 
 
 def configure_dev(dev):
@@ -73,7 +73,8 @@ def configure_dev(dev):
 def main():
     dev = find_devs()
     eaddr, max_packet_size = configure_dev(dev)
-    for resp in dev_read(dev, eaddr, max_packet_size):
+    for c, resp in enumerate(dev_read(dev, eaddr, max_packet_size), start=1):
+        resp = '{}: {}'.format(c, resp)
         print(resp)
 
 
