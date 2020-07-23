@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # By Valentine Dreyk
 
+from subprocess import Popen
+from time import sleep
+
 import usb.core
 
 
@@ -68,9 +71,14 @@ def get_dev_props(dev):
 def main():
     dev = find_devs()
     eaddr, max_packet_size = configure_dev(dev)
+    print('Send USB device output to Telegram bot?\n1. Yes\n2. No')
+    send_to_telegram_bot = int(input('Choice: '))
     for c, resp in enumerate(dev_read(dev, eaddr, max_packet_size), start=1):
         resp = '{}: {}'.format(c, resp)
         print(resp)
+        if send_to_telegram_bot == 1:
+            Popen('telegram-send "{}"'.format(resp), shell=True)
+            sleep(0.05)
 
 
 if __name__ == '__main__':
