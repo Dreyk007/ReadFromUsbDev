@@ -4,25 +4,6 @@
 import usb.core
 
 
-def get_dev_props(dev):
-    try:
-        yield dev.manufacturer
-    except:
-        yield None
-    try:
-        yield dev.product
-    except:
-        yield None
-    try:
-        yield hex(dev.idVendor)
-    except:
-        yield None
-    try:
-        yield hex(dev.idProduct)
-    except:
-        yield None
-
-
 def find_devs():
     devs = list(usb.core.find(find_all=True))
 
@@ -67,6 +48,25 @@ def configure_dev(dev):
     max_packet_size = ep.wMaxPacketSize
 
     return eaddr, max_packet_size
+
+
+def get_dev_props(dev):
+    try:
+        yield dev.manufacturer
+    except:
+        yield None
+    try:
+        yield dev.product
+    except:
+        yield None
+    try:
+        yield hex(dev.idVendor)
+    except:
+        yield None
+    try:
+        yield hex(dev.idProduct)
+    except:
+        yield None
 
 
 def main():
