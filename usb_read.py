@@ -21,8 +21,7 @@ def find_devs():
 def dev_read(dev, eaddr, max_packet_size):
     while True:
         try:
-            resp = dev.read(eaddr, max_packet_size)
-            yield resp
+            yield dev.read(eaddr, max_packet_size)
         except KeyboardInterrupt:
             break
         except:
@@ -31,10 +30,7 @@ def dev_read(dev, eaddr, max_packet_size):
 
 def configure_dev(dev):
     ep = dev[0].interfaces()[0].endpoints()[0]
-    interfaces = []
-    for i in dev[0].interfaces():
-        i = i.bInterfaceNumber
-        interfaces.append(i)
+    interfaces = [i.bInterfaceNumber for i in dev[0].interfaces()]
 
     dev.reset()
 
